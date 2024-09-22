@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- Define the HelloWorld bean -->
+<!--    <bean id="helloWorld" class="org.example.HelloWorld">-->
+<!--        &lt;!&ndash; Inject the message property &ndash;&gt;-->
+<!--        <property name="message" value="hello 1st example"/>-->
+<!--    </bean>-->
+
+
+    <bean id="service1" class="org.example.Service1Impl"/>
+
+    <!-- Bean with integer constructor -->
+    <bean id="service2" class="org.example.Service1Impl">
+        <constructor-arg value="20"/>
+    </bean>
+
+    <!-- Bean with string -->
+    <bean id="service3" class="org.example.Service1Impl">
+        <constructor-arg value="alo"/>
+    </bean>
+
+    <!-- Bean with value -->
+    <bean id="service4" class="org.example.Service1Impl"
+        factory-method="getBean">
+        <constructor-arg value="5"/>
+    </bean>
+
+    <!-- Define the Factory bean -->
+    <bean id="factory" class="org.example.Factory" />
+
+    <!-- toyota example-->
+<!--    <bean id="myCar" factory-bean="factory" factory-method="getService">-->
+<!--        <constructor-arg value="Toyota" />-->
+<!--    </bean>-->
+
+    <bean id="myCar" factory-bean="factory" factory-method="getService">
+        <constructor-arg value="20" />
+    </bean>
+
+<!--    <bean id="myCar" factory-bean="factory" factory-method="getService">-->
+<!--    </bean>-->
+
+    <bean id="fullname" class="org.example.User">
+        <constructor-arg value="tony" />
+        <constructor-arg value="stark" />
+    </bean>
+
+    <bean id="userFactory" class="org.example.UserFactory" />
+
+    <!-- Define the User bean using the factory method -->
+    <bean id="user" factory-bean="userFactory" factory-method="createUser">
+        <constructor-arg value="tony" />
+        <constructor-arg value="stark" />
+    </bean>
+
+
+    <bean id="b" class="org.example.B">
+        <property name="a" ref="a" />
+    </bean>
+
+    <!--    circular dependency-->
+    <bean id="a" class="org.example.A">
+        <constructor-arg ref="b"/>
+    </bean>
+
+
+
+</beans>
