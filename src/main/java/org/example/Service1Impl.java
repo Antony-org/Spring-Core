@@ -33,6 +33,7 @@ public class Service1Impl {
 
     // Factory method
     public static Service1Impl getBean(int value) {
+        System.out.println("factory method called: " + value);
         return new Service1Impl(value);
     }
 }

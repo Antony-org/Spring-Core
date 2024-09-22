@@ -16,7 +16,7 @@
 
     <!-- Bean with integer constructor -->
     <bean id="service2" class="org.example.Service1Impl">
-        <constructor-arg value="20"/>
+        <constructor-arg value="20" type="int"/>
     </bean>
 
     <!-- Bean with string -->
@@ -52,11 +52,21 @@
 
     <bean id="userFactory" class="org.example.UserFactory" />
 
-    <!-- Define the User bean using the factory method -->
-    <bean id="user" factory-bean="userFactory" factory-method="createUser">
-        <constructor-arg value="tony" />
-        <constructor-arg value="stark" />
+    <bean id="address" class="org.example.Address">
+        <constructor-arg value="wherever" />
     </bean>
+
+    <!-- Define the User bean using the factory method and passing the Address -->
+    <bean id="user" factory-bean="userFactory" factory-method="createUser">
+        <constructor-arg ref="address" />
+    </bean>
+
+
+    <!-- Define the User bean using the factory method -->
+<!--    <bean id="user" factory-bean="userFactory" factory-method="createUser">-->
+<!--        <constructor-arg value="tony" />-->
+<!--        <constructor-arg value="stark" />-->
+<!--    </bean>-->
 
 
     <bean id="b" class="org.example.B">
@@ -67,7 +77,5 @@
     <bean id="a" class="org.example.A">
         <constructor-arg ref="b"/>
     </bean>
-
-
 
 </beans>
