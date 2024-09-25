@@ -1,27 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="
-           http://www.springframework.org/schema/beans
-           http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tool="http://www.springframework.org/schema/tool"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/tool http://www.springframework.org/schema/tool/spring-tool.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
 
     <!-- Lab 2 -->
-
-
+<context:annotation-config/>
 
     <bean id="address" class="org.example.Address">
-        <constructor-arg value="wherever" />
+        <qualifier type="org.example.custom.DAOQualifier">
+            <attribute key="name" value="customDAO"/>
+            <attribute key="mobile" value="Vodafone"/>
+        </qualifier>
+        <constructor-arg value="10880 Malibu Point" />
         <property name="street" value="10880 Malibu Point" />
     </bean>
 
+    <bean id="theName" class="java.lang.String">
+        <constructor-arg value="Tony Stark" type="java.lang.String"/>
+        <qualifier>
+            <attribute key="name" value="theName"/>
+        </qualifier>
+    </bean>
+
     <bean id="name" class="java.lang.String">
-        <constructor-arg value="Tony Stark" />
+        <constructor-arg value="Tony Stark 2" type="java.lang.String"/>
+
     </bean>
 
     <!-- making User List -->
-    <bean id="user" class="org.example.User" autowire="byName" init-method="init">
-<!--        <constructor-arg ref="address" />-->
+    <bean id="user" class="org.example.User">
         <property name="emails">
             <list>
                 <value>tony@starkindustries.com</value>
@@ -32,29 +42,34 @@
     </bean>
 
 
-
-    <bean id="getAddress" class="org.example.GetAddress">
-        <property name="user" ref="user"/>
-        <property name="user.address.street" value="idk"/>
+    <!-- AdvancedUser Bean that inherits from User and merges emails -->
+    <bean id="advancedUser" class="org.example.AdvancedUser" parent="user">
+        <property name="emails">
+            <list merge="true">
+                <value>tony.stark@shield.com</value>
+                <value>genius@avengers.com</value>
+            </list>
+        </property>
     </bean>
 
 
-    <!-- Define the User bean using the factory method -->
-<!--    <bean id="user" factory-bean="userFactory" factory-method="createUser">-->
-<!--        <constructor-arg value="tony" />-->
-<!--        <constructor-arg value="stark" />-->
+    <bean id="mappings" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <value>application.properties</value>
+        </property>
+    </bean>
+
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="url" value="${jdbc.url}" />
+        <property name="username" value="${jdbc.username}" />
+    </bean>
+
+
+<!--    <bean id="customBean" class="org.example.Address">-->
+<!--        <qualifier type="org.example.custom.DAOQualifier">-->
+<!--            <attribute key="name" value="customDAO"/>-->
+<!--            <attribute key="mobile" value="Vodafone"/>-->
+<!--        </qualifier>-->
 <!--    </bean>-->
-
-
-
-
-    <!--    circular dependency-->
-    <bean id="a" class="org.example.A" depends-on="b">
-        <constructor-arg ref="b"/>
-    </bean>
-
-    <bean id="b" class="org.example.B">
-        <property name="a" ref="a" />
-    </bean>
 
 </beans>

@@ -1,5 +1,7 @@
 package org.example.app;
 
+import org.apache.commons.dbcp.BasicDataSource;
+import org.example.AdvancedUser;
 import org.example.User;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -17,5 +19,15 @@ public class MainApp {
 
 //        context.registerShutdownHook();
 
+
+        AdvancedUser advancedUser = (AdvancedUser) context.getBean("advancedUser");
+
+        System.out.println("Emails: " + advancedUser.getEmails());
+
+        BasicDataSource dataSource = (BasicDataSource) context.getBean("dataSource");
+
+        System.out.println("JDBC URL: " + dataSource.getUrl());
+        System.out.println("Username: " + dataSource.getUsername());
+        System.out.println("Password: " + dataSource.getPassword());
     }
 }

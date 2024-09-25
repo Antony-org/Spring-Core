@@ -1,19 +1,20 @@
 package org.example;
 
+import jakarta.annotation.Resource;
+import org.example.custom.DAOQualifier;
+import org.example.custom.Mobile;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+
 import java.util.List;
 
 public class User {
+    @Autowired
     String name;
     List <String> emails;
+    @Autowired
+    @DAOQualifier(name = "customDAO", mobile = Mobile.Vodafone)
     Address address;
-
-    public void init(){
-        System.out.println("inside init method");
-    }
-
-    public void destroy(){
-        System.out.println("inside destroy method");
-    }
 
     public User() {}
 
@@ -38,6 +39,7 @@ public class User {
         return address;
     }
 
+    @Resource(name = "address")
     public void setAddress(Address address) {
         this.address = address;
     }

@@ -31,6 +31,22 @@
          <version>6.1.13</version>
       </dependency>
 
+      <!-- Apache Commons DBCP for BasicDataSource -->
+      <dependency>
+         <groupId>commons-dbcp</groupId>
+         <artifactId>commons-dbcp</artifactId>
+         <version>1.4</version>
+      </dependency>
+
+
+      <!-- https://mvnrepository.com/artifact/jakarta.annotation/jakarta.annotation-api -->
+      <dependency>
+         <groupId>jakarta.annotation</groupId>
+         <artifactId>jakarta.annotation-api</artifactId>
+         <version>3.0.0</version>
+      </dependency>
+
+
    </dependencies>
 
    <build>
