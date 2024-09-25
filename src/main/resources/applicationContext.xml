@@ -5,60 +5,37 @@
            http://www.springframework.org/schema/beans
            http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <!-- Define the HelloWorld bean -->
-<!--    <bean id="helloWorld" class="org.example.HelloWorld">-->
-<!--        &lt;!&ndash; Inject the message property &ndash;&gt;-->
-<!--        <property name="message" value="hello 1st example"/>-->
-<!--    </bean>-->
+
+    <!-- Lab 2 -->
 
 
-    <bean id="service1" class="org.example.Service1Impl"/>
-
-    <!-- Bean with integer constructor -->
-    <bean id="service2" class="org.example.Service1Impl">
-        <constructor-arg value="20" type="int"/>
-    </bean>
-
-    <!-- Bean with string -->
-    <bean id="service3" class="org.example.Service1Impl">
-        <constructor-arg value="alo"/>
-    </bean>
-
-    <!-- Bean with value -->
-    <bean id="service4" class="org.example.Service1Impl"
-        factory-method="getBean">
-        <constructor-arg value="5"/>
-    </bean>
-
-    <!-- Define the Factory bean -->
-    <bean id="factory" class="org.example.Factory" />
-
-    <!-- toyota example-->
-<!--    <bean id="myCar" factory-bean="factory" factory-method="getService">-->
-<!--        <constructor-arg value="Toyota" />-->
-<!--    </bean>-->
-
-    <bean id="myCar" factory-bean="factory" factory-method="getService">
-        <constructor-arg value="20" />
-    </bean>
-
-<!--    <bean id="myCar" factory-bean="factory" factory-method="getService">-->
-<!--    </bean>-->
-
-    <bean id="fullname" class="org.example.User">
-        <constructor-arg value="tony" />
-        <constructor-arg value="stark" />
-    </bean>
-
-    <bean id="userFactory" class="org.example.UserFactory" />
 
     <bean id="address" class="org.example.Address">
         <constructor-arg value="wherever" />
+        <property name="street" value="10880 Malibu Point" />
     </bean>
 
-    <!-- Define the User bean using the factory method and passing the Address -->
-    <bean id="user" factory-bean="userFactory" factory-method="createUser">
-        <constructor-arg ref="address" />
+    <bean id="name" class="java.lang.String">
+        <constructor-arg value="Tony Stark" />
+    </bean>
+
+    <!-- making User List -->
+    <bean id="user" class="org.example.User" autowire="byName" init-method="init">
+<!--        <constructor-arg ref="address" />-->
+        <property name="emails">
+            <list>
+                <value>tony@starkindustries.com</value>
+                <value>ironman@avengers.com</value>
+                <value>tony.stark@shield.com</value>
+            </list>
+        </property>
+    </bean>
+
+
+
+    <bean id="getAddress" class="org.example.GetAddress">
+        <property name="user" ref="user"/>
+        <property name="user.address.street" value="idk"/>
     </bean>
 
 
@@ -69,13 +46,15 @@
 <!--    </bean>-->
 
 
-    <bean id="b" class="org.example.B">
-        <property name="a" ref="a" />
-    </bean>
+
 
     <!--    circular dependency-->
-    <bean id="a" class="org.example.A">
+    <bean id="a" class="org.example.A" depends-on="b">
         <constructor-arg ref="b"/>
+    </bean>
+
+    <bean id="b" class="org.example.B">
+        <property name="a" ref="a" />
     </bean>
 
 </beans>
