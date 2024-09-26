@@ -1,8 +1,6 @@
 package org.example;
 
 import jakarta.annotation.Resource;
-import org.example.custom.DAOQualifier;
-import org.example.custom.Mobile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
@@ -13,7 +11,6 @@ public class User {
     String name;
     List <String> emails;
     @Autowired
-    @DAOQualifier(name = "customDAO", mobile = Mobile.Vodafone)
     Address address;
 
     public User() {}
