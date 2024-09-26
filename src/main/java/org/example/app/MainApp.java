@@ -1,9 +1,6 @@
 package org.example.app;
 
-import org.apache.commons.dbcp.BasicDataSource;
-import org.example.AdvancedUser;
-import org.example.Dao;
-import org.example.User;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
