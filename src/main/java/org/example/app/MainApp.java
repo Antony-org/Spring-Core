@@ -13,9 +13,9 @@ import java.util.Arrays;
 public class MainApp {
     public static void main(String[] args) {
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
-        User user = context.getBean("user",User.class);
+//        User user = context.getBean("user",User.class);
 
-        Dao dao = context.getBean("dao2",Dao.class);
+//        Dao dao = context.getBean("dao2",Dao.class);
 
 //        CustomClass customClass = context.getBean("customClass",CustomClass.class);
 //        CustomClass customClass2 = context.getBean("customClass",CustomClass.class);
@@ -27,7 +27,7 @@ public class MainApp {
 //            System.out.println("custom class is a singleton");
 //        }
 
-        Arrays.stream(context.getBeanDefinitionNames()).toList().forEach(System.out::println);
+//        Arrays.stream(context.getBeanDefinitionNames()).toList().forEach(System.out::println);
 
     }
 }

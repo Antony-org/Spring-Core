@@ -6,41 +6,38 @@
            http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/tool http://www.springframework.org/schema/tool/spring-tool.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
 
-
-<context:component-scan base-package="org.example"/>
-
     <context:component-scan base-package="org.example" scope-resolver="org.example.custom.CustomScope">
         <context:include-filter type="regex" expression="org\.example\..*Service" />
     </context:component-scan>
 
 
-    <bean id="address" class="org.example.Address">
-        <constructor-arg value="10880 Malibu Point" />
-        <property name="street" value="10880 Malibu Point" />
-    </bean>
+<!--    <bean id="address" class="org.example.Address">-->
+<!--        <constructor-arg value="10880 Malibu Point" />-->
+<!--        <property name="street" value="10880 Malibu Point" />-->
+<!--    </bean>-->
 
-    <bean id="theName" class="java.lang.String">
-        <constructor-arg value="Tony Stark" type="java.lang.String"/>
-        <qualifier>
-            <attribute key="name" value="theName"/>
-        </qualifier>
-    </bean>
+<!--    <bean id="theName" class="java.lang.String">-->
+<!--        <constructor-arg value="Tony Stark" type="java.lang.String"/>-->
+<!--        <qualifier>-->
+<!--            <attribute key="name" value="theName"/>-->
+<!--        </qualifier>-->
+<!--    </bean>-->
 
-    <bean id="name" class="java.lang.String">
-        <constructor-arg value="Tony Stark 2" type="java.lang.String"/>
+<!--    <bean id="name" class="java.lang.String">-->
+<!--        <constructor-arg value="Tony Stark 2" type="java.lang.String"/>-->
 
-    </bean>
+<!--    </bean>-->
 
-    <!-- making User List -->
-    <bean id="user" class="org.example.User">
-        <property name="emails">
-            <list>
-                <value>tony@starkindustries.com</value>
-                <value>ironman@avengers.com</value>
-                <value>tony.stark@shield.com</value>
-            </list>
-        </property>
-    </bean>
+<!--    &lt;!&ndash; making User List &ndash;&gt;-->
+<!--    <bean id="user" class="org.example.User">-->
+<!--        <property name="emails">-->
+<!--            <list>-->
+<!--                <value>tony@starkindustries.com</value>-->
+<!--                <value>ironman@avengers.com</value>-->
+<!--                <value>tony.stark@shield.com</value>-->
+<!--            </list>-->
+<!--        </property>-->
+<!--    </bean>-->
 
 
 

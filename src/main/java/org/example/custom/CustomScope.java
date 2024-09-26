@@ -13,15 +13,16 @@ public class CustomScope implements ScopeMetadataResolver {
 
 
         // Add custom logic here. For example, set the bean as a prototype if its name starts with "custom":
-        if(bd.getBeanClassName().equals("org.example.CustomClass")){
+        if(bd.getBeanClassName().equals("org.example.customscope.CustomClass")){
             System.out.println("here in "+bd.getBeanClassName());
             scopeMetadata.setScopeName(BeanDefinition.SCOPE_PROTOTYPE);
             System.out.println(scopeMetadata.getScopeName());
             return scopeMetadata;
         } else {
             scopeMetadata.setScopeName("singleton");
+            return scopeMetadata;
+
         }
 
-        return scopeMetadata;
     }
 }
