@@ -1,6 +1,8 @@
 package org.example.app;
 
 
+import org.example.Dao;
+import org.example.UserService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -12,7 +14,8 @@ public class MainApp {
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 //        User user = context.getBean("user",User.class);
 
-//        Dao dao = context.getBean("dao2",Dao.class);
+        Dao dao = context.getBean("dao2",Dao.class);
+        System.out.println(dao.getClass().getSimpleName());
 
 //        CustomClass customClass = context.getBean("customClass",CustomClass.class);
 //        CustomClass customClass2 = context.getBean("customClass",CustomClass.class);
