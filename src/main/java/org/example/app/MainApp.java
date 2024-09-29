@@ -2,6 +2,7 @@ package org.example.app;
 
 
 import org.example.Dao;
+import org.example.Dummy;
 import org.example.UserService;
 import org.example.configuration.AppConfig;
 import org.example.custom.MyPropertySource;
@@ -17,9 +18,10 @@ import java.util.Arrays;
 
 public class MainApp {
     public static void main(String[] args) {
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
         context.getEnvironment().setActiveProfiles("production");
-
+        context.register(AppConfig.class);
+        context.refresh();
 
         UserService userService = context.getBean("UserService1", UserService.class);
 
@@ -36,7 +38,6 @@ public class MainApp {
         String propertyValue = env.getProperty("userId");
         System.out.println("userId is " + propertyValue);
         System.out.println("userUrl is " + dataSource);
-
 
 
     }
