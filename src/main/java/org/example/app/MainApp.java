@@ -11,6 +11,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.core.env.Environment;
 import org.springframework.core.env.MutablePropertySources;
 
+import javax.sql.DataSource;
 import java.lang.reflect.Array;
 import java.util.Arrays;
 
@@ -28,9 +29,15 @@ public class MainApp {
         MutablePropertySources sources = context.getEnvironment().getPropertySources();
 
         sources.addFirst (new MyPropertySource("Mayresource"));
-        Environment env = context.getEnvironment ();
-        String propertyValue = env. getProperty ("userId") ;
-        System.out.println("userId is " + propertyValue) ;
+
+        DataSource dataSource = context.getBean(DataSource.class);
+
+        Environment env = context.getEnvironment();
+        String propertyValue = env.getProperty("userId");
+        System.out.println("userId is " + propertyValue);
+        System.out.println("userUrl is " + dataSource);
+
+
 
     }
 }
